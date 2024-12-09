@@ -1,12 +1,26 @@
+import { useState } from "react";
+import { NavLink } from "react-router";
+
 function NavItems({ menu }) {
-    return (
-      <div className="flex gap-x-8">
-        {menu.map((item, index) => (
-          <a key={index} href={item.link}>{item.title}</a>
-        ))}
-      </div>
-    );
-  }
-  //daskjdaskjda
-  
-  export default NavItems;
+  const [activeTab, setActiveTab] = useState("Dashboard");
+
+  return (
+    <ul className="flex gap-x-8 text-black">
+      {menu.map((item) => {
+        return (
+          <NavLink
+            key={item.title}
+            to={item.link}
+            className={({ isActive }) =>
+              isActive ?  "text-[#19918F] font-bold" : "text-black"
+            }
+          >
+            {item.title}
+          </NavLink>
+        );
+      })}
+    </ul>
+  );
+}
+
+export default NavItems;
