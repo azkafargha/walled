@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import loginBg from "../assets/login.png";
 import logo from "../assets/logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import ActionButton from "../components/ActionButton";
 
@@ -13,14 +13,36 @@ function Login() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const storedLogin = localStorage.getItem("login");
+    console.log(storedLogin);
+    if (storedLogin) {
+      navigate("/dashboard"); // Redirect to dashboard if user is logged in
+    }
+  }, [navigate]);
+
   const handleChange = (e) => {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/dashboard");
+    const response = await fetch("http://localhost:3000/users");
+    const users = await response.json();
+  
+    const user = users.find(
+      (u) =>
+        u.email === loginForm.email && u.password === loginForm.password
+    );
+  
+    if (user) {
+      localStorage.setItem("login", JSON.stringify(user));
+      navigate("/dashboard");
+    } else {
+      alert("Email atau password salah!");
+    }
   };
+  
 
   return (
     <section className="flex w-full h-screen bg-white">
@@ -29,14 +51,14 @@ function Login() {
           <img className="w-[290px] mx-auto" src={logo} alt="logo" />
           <form className="flex flex-col mt-24 gap-y-5">
             <input
-              className="bg-[#FAFBFD] pl-7 py-4 min-w-[400px] rounded-[10px]"
+              className="bg-[#FAFBFD] pl-7 py-4 min-w-[400px] rounded-[10px] text-black"
               name="email"
               type="email"
               placeholder="Email"
               onChange={(e) => handleChange(e)}
             />
             <input
-              className="bg-[#FAFBFD] pl-7 py-4 min-w-[400px] rounded-[10px]"
+              className="bg-[#FAFBFD] pl-7 py-4 min-w-[400px] rounded-[10px] text-black"
               name="password"
               type="password"
               placeholder="Password"
