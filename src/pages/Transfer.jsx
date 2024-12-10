@@ -27,7 +27,7 @@ function Transfer() {
               <input
                 type="text"
                 id="large-input"
-                className="block w-full h-[100px] p-4 shadow-lg rounded-lg bg-white text-black"
+                className="block w-full h-[90px] p-4 shadow-lg rounded-lg bg-white text-black"
                 />
             </div>
           </form>
