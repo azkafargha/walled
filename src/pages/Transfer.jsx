@@ -22,7 +22,7 @@ function Transfer() {
             </div>
             <div className="m-5">
               <label className="text-black block mb-2 text-sm font-medium">
-                Notes
+                Notesss
               </label>
               <input
                 type="text"
