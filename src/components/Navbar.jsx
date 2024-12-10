@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import NavItems from "./NavItems";
+=======
+import NavItems from "./NavItems.jsx";
+>>>>>>> c449dd74f4b75dcf7302954c3ca734dbd4b05d6c
 import logo from "../assets/logo.png";
 
 const MENU = [
