@@ -1,9 +1,5 @@
 import { useState } from "react";
-<<<<<<< HEAD
 import Avatar from "./Avatar";
-=======
-import Avatar from "./Avatar.jsx";
->>>>>>> c449dd74f4b75dcf7302954c3ca734dbd4b05d6c
 import viewIcon from "../assets/view.png";
 
 function Hero() {
@@ -14,11 +10,7 @@ function Hero() {
       <div className="flex items-center justify-center">
         <div className="mr-auto">
           <h1 className="text-black text-6xl font-bold">
-<<<<<<< HEAD
             Good Morning, Chelsea!
-=======
-            Good Morning, Ifa!
->>>>>>> c449dd74f4b75dcf7302954c3ca734dbd4b05d6c
           </h1>
           <p className="text-black text-2xl mt-3">
             Check all your incoming and outgoing transactions here
