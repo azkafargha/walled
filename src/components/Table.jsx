@@ -1,116 +1,85 @@
-function Table() {
-    return (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" className="px-6 py-3">
-                            Product name
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Color
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Category
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Price
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Action
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Apple MacBook Pro 17"
-                        </th>
-                        <td className="px-6 py-4">
-                            Silver
-                        </td>
-                        <td className="px-6 py-4">
-                            Laptop
-                        </td>
-                        <td className="px-6 py-4">
-                            $2999
-                        </td>
-                        <td className="px-6 py-4">
-                            <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Microsoft Surface Pro
-                        </th>
-                        <td className="px-6 py-4">
-                            White
-                        </td>
-                        <td className="px-6 py-4">
-                            Laptop PC
-                        </td>
-                        <td className="px-6 py-4">
-                            $1999
-                        </td>
-                        <td className="px-6 py-4">
-                            <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Magic Mouse 2
-                        </th>
-                        <td className="px-6 py-4">
-                            Black
-                        </td>
-                        <td className="px-6 py-4">
-                            Accessories
-                        </td>
-                        <td className="px-6 py-4">
-                            $99
-                        </td>
-                        <td className="px-6 py-4">
-                            <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Google Pixel Phone
-                        </th>
-                        <td className="px-6 py-4">
-                            Gray
-                        </td>
-                        <td className="px-6 py-4">
-                            Phone
-                        </td>
-                        <td className="px-6 py-4">
-                            $799
-                        </td>
-                        <td className="px-6 py-4">
-                            <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Magic Mouse 2
-                        </th>
-                        <td className="px-6 py-4">
-                            Black
-                        </td>
-                        <td className="px-6 py-4">
-                            Accessories
-                        </td>
-                        <td className="px-6 py-4">
-                            $99
-                        </td>
-                        <td className="px-6 py-4">
-                            <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        )
-        }
+import { useEffect, useState } from "react";
 
-export default Table
+function Table() {
+  const [transactions, setTransactions] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchTransactions() {
+      const url = "http://localhost:3000/transactions"; // Ganti dengan endpoint API transaksi Anda
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        const data = await response.json();
+        setTransactions(data);
+      } catch (error) {
+        console.error("Failed to fetch transactions:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchTransactions();
+  }, []);
+
+  return (
+    <div className="overflow-x-auto w-full mt-6">
+  {isLoading ? (
+    <p>Loading transactions...</p>
+  ) : (
+    <table className="table-auto border-collapse border border-gray-300 w-full text-left">
+      <thead>
+        <tr className="bg-gray-200">
+          <th className="border border-gray-300 px-4 py-2 text-gray-800">Date & Time</th>
+          <th className="border border-gray-300 px-4 py-2 text-gray-800">Type</th>
+          <th className="border border-gray-300 px-4 py-2 text-gray-800">From / To</th>
+          <th className="border border-gray-300 px-4 py-2 text-gray-800">Description</th>
+          <th className="border border-gray-300 px-4 py-2 text-gray-800">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {transactions.length > 0 ? (
+          transactions.map((transaction, index) => (
+            <tr key={index} className="hover:bg-gray-100">
+              <td className="border border-gray-300 px-4 py-2 text-gray-800">
+                {transaction.dateTime}
+              </td>
+              <td className="border border-gray-300 px-4 py-2 text-gray-800">
+                {transaction.type}
+              </td>
+              <td className="border border-gray-300 px-4 py-2 text-gray-800">
+                {transaction.fromTo}
+              </td>
+              <td className="border border-gray-300 px-4 py-2 text-gray-800">
+                {transaction.description}
+              </td>
+              <td
+                className={`border border-gray-300 px-4 py-2 font-bold ${
+                  transaction.type === "CREDIT" ? "text-green-500" : "text-red-500"
+                }`}
+              >
+                {transaction.amount.toLocaleString("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                })}
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="5" className="text-center py-4 text-gray-800">
+              No transactions found.
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  )}
+</div>
+
+
+  );
+}
+
+export default Table;

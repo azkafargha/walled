@@ -1,20 +1,44 @@
 {
-    "posts": [
-      { "id": "1", "title": "a title", "views": 100 },
-      { "id": "2", "title": "another title", "views": 200 }
-    ],
-    "comments": [
-      { "id": "1", "text": "a comment about post 1", "postId": "1" },
-      { "id": "2", "text": "another comment about post 1", "postId": "1" }
-    ],
-    "profile": {
-      "name": "typicode"
+  "users": [
+    {
+      "name": "Azka",
+      "password": "12345",
+      "email": "azka@gmail.com",
+      "balance": 7100000
+    }
+  ],
+  "transactions": [
+    {
+      "id": "1",
+      "dateTime": "2022-06-30 20:10",
+      "type": "DEBIT",
+      "fromTo": "310001001",
+      "description": "Fore Coffee",
+      "amount": -75000
     },
-    "users": [
-      { 
-          "name" : "Azka",
-          "password" : "12345",
-          "email" : "azka@gmail.com",
-          "balance" : "7,100,000,00-"
-      }]
-  }
+    {
+      "id": "2",
+      "dateTime": "2022-06-30 20:10",
+      "type": "CREDIT",
+      "fromTo": "1001",
+      "description": "Topup from Bank Transfer",
+      "amount": 1000000
+    },
+    {
+      "id": "3",
+      "dateTime": "2022-06-30 20:10",
+      "type": "DEBIT",
+      "fromTo": "310001001",
+      "description": "Fore Coffee",
+      "amount": -75000
+    },
+    {
+      "id": "4",
+      "dateTime": "2022-06-30 20:10",
+      "type": "CREDIT",
+      "fromTo": "1001",
+      "description": "Topup from Bank Transfer",
+      "amount": 1000000
+    }
+  ]
+}

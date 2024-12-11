@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import avatarImg from "../assets/avatar.png";
 
-function Avatar({name}) {
+function Avatar({ name }) {
   const [isAvatarActive, setIsAvatarActive] = useState(false);
 
   return (
